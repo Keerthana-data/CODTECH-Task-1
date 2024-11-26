@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+df['target'] = iris.target
+
+print(df.head())
+
+print(df.isnull().sum())
+
+print(df.describe())
+
+df.hist(figsize=(10, 8))
+plt.show()
+
+corr = df.corr()
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr, annot=True, cmap='coolwarm', square=True)
+plt.show()
+
+sns.pairplot(df, hue='target', markers=['o', 's', 'D'])
+plt.show()
+
+df.plot(kind='box', subplots=True, layout=(2,2), figsize=(10, 8))
+plt.show() 
